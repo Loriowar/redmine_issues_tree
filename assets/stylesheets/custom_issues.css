@@ -1,0 +1,10 @@
+.icon-orange-tree {
+    background-image: url(../images/tree_icon.png);
+}
+.icon-plane-list {
+  background-image: url(../images/text_list_bullets.png);
+}
+
+.tree-actions-container {
+  margin: 10px;
+}

@@ -1,1 +1,8 @@
 ru:
+  issues_tree:
+    tree_view: Древовидная структура
+    expand_current_nodes: Развернуть следующий уровень
+    collapse_all: Свернуть всё
+    back_to_plain_list: Плоская структура
+    errors:
+      unable_to_group_in_tree_view: Невозможно группировать записи при древовидном отображении

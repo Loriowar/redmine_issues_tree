@@ -1,0 +1,26 @@
+- tree_id = 'issues-tree'
+
+%div.tree-actions-container
+  %input{type: 'button',
+         value:"#{l(:expand_current_nodes, scope: 'issues_tree')}",
+         onclick: "jQuery('#'+'#{tree_id}').treetable('expandAll');"}
+  %input{type: 'button',
+         value:"#{l(:collapse_all, scope: 'issues_tree')}",
+         onclick: "jQuery('#'+'#{tree_id}').treetable('collapseAll');"}
+
+= form_tag({}) do
+  = hidden_field_tag 'back_url', url_for(params), id: nil
+  %div.autoscroll
+    %table{class: 'list issues', id: tree_id}
+      %thead
+        %tr
+          %th.checkbox.hide-when-print
+            = link_to image_tag('toggle_check.png'), {},
+                        onclick: 'toggleIssuesSelection(this); return false;',
+                        title: "#{l(:button_check_all)}/#{l(:button_uncheck_all)}"
+          - query.inline_columns.each do |column|
+            = column_header(column)
+      %tbody
+        - issues.each do |issue|
+          = render partial: 'tree_node',
+                   locals: {issue: issue, query: @query, issues_ids: @issues_ids}

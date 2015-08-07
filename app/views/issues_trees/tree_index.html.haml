@@ -1,0 +1,84 @@
+- content_for :header_tags do
+  = stylesheet_link_tag 'jquery.treetable.theme.default.css', plugin: :redmine_issues_tree
+  = stylesheet_link_tag 'jquery.treetable.css',               plugin: :redmine_issues_tree
+  = stylesheet_link_tag 'custom_issues.css',                  plugin: :redmine_issues_tree
+
+  = javascript_include_tag 'jquery.treetable.js',             plugin: :redmine_issues_tree
+  = javascript_include_tag 'tree.issues.initializer.js',      plugin: :redmine_issues_tree
+
+  = include_gon
+
+
+%div.contextual
+  - if !@query.new_record? && @query.editable_by?(User.current)
+    = link_to l(:button_edit), edit_query_path(@query), class: 'icon icon-edit'
+    = delete_link query_path(@query)
+
+  - unless @project.nil?
+    = link_to l(:back_to_plain_list, scope: 'issues_tree'),
+              {controller: :issues},
+              class: 'icon icon-plane-list'
+
+    = link_to l(:label_issue_new), { controller: :issues,
+                                     action: :new,
+                                     project_id: @project },
+              class: 'icon icon-add'
+%br
+%br
+
+- html_title(@query.new_record? ? l(:label_issue_plural) : @query.name)
+
+= form_tag({controller: :issues_trees, action: :tree_index, project_id: @project},
+            method: :get, id: 'query_form', class: 'redmine-query-form') do
+  = hidden_field_tag 'set_filter', '1'
+  %div{id: 'query_form_content', class: 'hide-when-print'}
+    %fieldset{id: 'filters', class: "collapsible #{@query.new_record? ? '' : 'collapsed'}"}
+      %legend{onclick: 'toggleFieldset(this);'}
+        = l(:label_filter_plural)
+      %div{style: "#{@query.new_record? ? '' : 'display: none;'}"}
+        = render partial: 'queries/filters', locals: {query: @query}
+    %fieldset{class: 'collapsible collapsed'}
+      %legend{onclick: 'toggleFieldset(this);'}
+        = l(:label_options)
+      %div{style: 'display: none;'}
+        %table
+          %tr
+            %td
+              = l(:field_column_names)
+            %td
+              = render_query_columns_selection(@query)
+          %tr
+            %td
+              %label{for: 'group_by'}
+              = l(:field_group_by)
+            %td
+              = select_tag('group_by',
+                            options_for_select([[]] + @query.groupable_columns.collect {|c| [c.caption, c.name.to_s]},
+                                               @query.group_by))
+          %tr
+            %td
+              = l(:button_show)
+            %td
+              = available_block_columns_tags(@query)
+  %p{class: 'buttons hide-when-print'}
+
+    = link_to_function l(:button_apply), 'submit_query_form("query_form")', class: 'icon icon-checked'
+    - if @query.new_record? && User.current.allowed_to?(:save_queries, @project, global: true)
+      = link_to_function l(:button_save),
+                         "$('#query_form').attr('action', '#{ @project ? new_project_query_path(@project) : new_query_path }'); submit_query_form('query_form')",
+                         class: 'icon icon-save'
+
+= error_messages_for 'query'
+- if @query.valid?
+  - if @issues.empty?
+    %p.nodata
+      = l(:label_no_data)
+  - else
+    = render partial: 'issues_trees/tree_list', locals: {issues: @issues, query: @query}
+
+= call_hook(:view_issues_index_bottom, {issues: @issues, project: @project, query: @query})
+
+- content_for :sidebar do
+  = render partial: 'issues/sidebar'
+
+= context_menu issues_context_menu_path

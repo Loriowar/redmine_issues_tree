@@ -1,3 +1,9 @@
 # English strings go here for Rails i18n
 en:
-  # my_label: "My label"
+  issues_tree:
+    tree_view: Tree view
+    expand_current_nodes: Expand next level
+    collapse_all: Collapse all
+    back_to_plain_list: Plain structire
+    errors:
+      unable_to_group_in_tree_view: Unagle to group in tree view
