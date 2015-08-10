@@ -1,3 +1,0 @@
-= redmine_issues_tree
-
-Description goes here
