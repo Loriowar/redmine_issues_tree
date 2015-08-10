@@ -1,8 +1,5 @@
 <%# issues_tree patch %>
-<% content_for :header_tags do %>
-  <%= stylesheet_link_tag 'custom_issues.css', plugin: :redmine_issues_tree %>
-  <%= javascript_include_tag 'tree.helper.js', plugin: :redmine_issues_tree %>
-<% end %>
+<%= call_hook(:view_issues_index_header, {issues: @issues, project: @project, query: @query}) %>
 <%# end patch %>
 
 <div class="contextual">
@@ -12,9 +9,7 @@
 <% end %>
 
   <%# issues_tree patch %>
-  <% unless @project.nil? %>
-    <%= link_to_redirect_to_tree_view %>
-  <% end %>
+  <%= call_hook(:view_issues_index_contextual, {issues: @issues, project: @project, query: @query}) %>
   <%# end patch %>
 </div>
 

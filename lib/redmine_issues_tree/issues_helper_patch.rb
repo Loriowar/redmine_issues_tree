@@ -2,10 +2,12 @@ module RedmineIssuesTree::IssuesHelperPatch
   extend ActiveSupport::Concern
 
   included do
-    def link_to_redirect_to_tree_view
-      link_to l(:tree_view, scope: 'issues_tree'), '#',
-              onclick: 'ajaxRedirectToTree()',
-              class: 'icon icon-orange-tree'
+    def link_to_tree_view(project = @project)
+      if project.present?
+        link_to l(:tree_view, scope: 'issues_tree'), '#',
+                class: 'icon icon-orange-tree issues-tree-view-link',
+                data: {link_to_tree_view: redirect_with_params_project_issues_trees_path(project_id: project)}
+      end
     end
   end
 

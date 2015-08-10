@@ -1,12 +1,13 @@
 $( document ).ready(function() {
-  var table = $("#issues-tree");
+  var $table = $("#issues-tree");
+  var $form = $(".issues-tree-index-form");
 
-  table.treetable({
-    column: gon.treetable_column_number,
+  $table.treetable({
+    column: $form.data('treetableColumnNumber'),
     expandable: true,
     onNodeCollapse: function() {
       var node = this;
-      table.treetable("unloadBranch", node);
+      $table.treetable("unloadBranch", node);
     },
     onNodeExpand: function() {
       var node = this;
@@ -14,12 +15,12 @@ $( document ).ready(function() {
       // Render loader/spinner while loading
       $.ajax({
         async: false, // Must be false, otherwise loadBranch happens after showChildren?
-        url: gon.url_for_load_tree_children + node.id + gon.action_for_load_tree_children,
-        data: {query_params: gon.query_params}
+        url: $form.data('urlForLoadTreeChildren') + node.id + $form.data('actionForLoadTreeChildren'),
+        data: {query_params: $form.data('queryParams')}
       }).done(function(html) {
         var rows = $(html).filter("tr");
 
-        table.treetable("loadBranch", node, rows);
+        $table.treetable("loadBranch", node, rows);
       });
     }
   });

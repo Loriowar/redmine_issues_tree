@@ -3,10 +3,8 @@
   = stylesheet_link_tag 'jquery.treetable.css',               plugin: :redmine_issues_tree
   = stylesheet_link_tag 'custom_issues.css',                  plugin: :redmine_issues_tree
 
-  = javascript_include_tag 'jquery.treetable.js',             plugin: :redmine_issues_tree
+  = javascript_include_tag 'custom.jquery.treetable.js',      plugin: :redmine_issues_tree
   = javascript_include_tag 'tree.issues.initializer.js',      plugin: :redmine_issues_tree
-
-  = include_gon
 
 
 %div.contextual
@@ -14,22 +12,19 @@
     = link_to l(:button_edit), edit_query_path(@query), class: 'icon icon-edit'
     = delete_link query_path(@query)
 
-  - unless @project.nil?
-    = link_to l(:back_to_plain_list, scope: 'issues_tree'),
-              {controller: :issues},
-              class: 'icon icon-plane-list'
-
-    = link_to l(:label_issue_new), { controller: :issues,
-                                     action: :new,
-                                     project_id: @project },
-              class: 'icon icon-add'
+  = call_hook(:view_issues_tree_index_contextual,
+              {issues: @issues, project: @project, query: @query})
 %br
 %br
 
 - html_title(@query.new_record? ? l(:label_issue_plural) : @query.name)
 
-= form_tag({controller: :issues_trees, action: :tree_index, project_id: @project},
-            method: :get, id: 'query_form', class: 'redmine-query-form') do
+= form_tag({controller: :issues_trees,
+            action: :tree_index,
+            project_id: @project},
+            method: :get, id: 'query_form',
+            class: 'redmine-query-form issues-tree-index-form',
+            data: @tree_data) do
   = hidden_field_tag 'set_filter', '1'
   %div{id: 'query_form_content', class: 'hide-when-print'}
     %fieldset{id: 'filters', class: "collapsible #{@query.new_record? ? '' : 'collapsed'}"}
@@ -62,7 +57,7 @@
               = available_block_columns_tags(@query)
   %p{class: 'buttons hide-when-print'}
 
-    = link_to_function l(:button_apply), 'submit_query_form("query_form")', class: 'icon icon-checked'
+    = link_to_function l(:button_apply), '$("#query_form").submit()', class: 'icon icon-checked'
     - if @query.new_record? && User.current.allowed_to?(:save_queries, @project, global: true)
       = link_to_function l(:button_save),
                          "$('#query_form').attr('action', '#{ @project ? new_project_query_path(@project) : new_query_path }'); submit_query_form('query_form')",

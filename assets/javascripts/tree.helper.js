@@ -1,10 +1,12 @@
 $( document ).ready(function() {
-  window.ajaxRedirectToTree = function() {
+  $(".issues-tree-view-link").on('click', function(e) {
+    e.preventDefault();
+
     selectAllOptions("selected_columns");
 
     $.ajax({
       type: "POST",
-      url: 'issues_trees/redirect_with_params',
+      url: $(e.target).data('linkToTreeView'),
       data: jQuery('#query_form').serialize(),
       dataType: "json",
       success: function (data, textStatus) {
@@ -14,7 +16,7 @@ $( document ).ready(function() {
         }
       }
     });
-  };
+  });
 
   function selectAllOptions(id) {
     var $select = $('#'+id);
