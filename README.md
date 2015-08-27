@@ -1,6 +1,14 @@
 # RedmineIssuesTree
 
-This is a plugin for [Redmine 3](http://www.redmine.org/). It's provides a tree view of the issues list.
+This is a plugin for [Redmine](http://www.redmine.org/). It's provides a tree view of the issues list.
+
+## Compatibility
+
+Plugin tested with 3.* versions of Redmine. But there is a high probability of compatibility with 2.* versions.
+
+## Examples of interface
+
+You can find them on the [official plugin page](https://www.redmine.org/plugins/redmine_issues_tree).
 
 ## Installation
 
