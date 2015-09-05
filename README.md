@@ -1,4 +1,4 @@
-# RedmineIssuesTree
+# RedmineIssuesTree [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KGN52ZXA8J7B8)
 
 This is a plugin for [Redmine](http://www.redmine.org/). It's provides a tree view of the issues list.
 
