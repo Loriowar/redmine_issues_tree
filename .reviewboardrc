@@ -1,4 +1,0 @@
-REVIEWBOARD_URL = 'http://reviewboard/'
-REPOSITORY = 'redmine_issues_tree'
-ENABLE_PROXY = False
-TRACKING_BRANCH = 'redmine3'
