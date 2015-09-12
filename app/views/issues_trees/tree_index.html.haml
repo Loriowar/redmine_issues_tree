@@ -16,7 +16,7 @@
               {issues: @issues, project: @project, query: @query})
 
 %h2
-  = @query.new_record? ? l(:label_issue_plural) : h(@query.name)
+  = @query.new_record? ? l(:label_issue_plural) : @query.name
 
 - html_title(@query.new_record? ? l(:label_issue_plural) : @query.name)
 
@@ -27,7 +27,7 @@
             id: 'query_form',
             class: 'redmine-query-form issues-tree-index-form',
             data: @tree_data) do
-  %div#query_form_content.hide-when-print
+  %div#query_form_with_buttons.hide-when-print
     = hidden_field_tag 'set_filter', '1'
     %div#query_form_content
       %fieldset{id: 'filters', class: "collapsible #{@query.new_record? ? '' : 'collapsed'}"}
