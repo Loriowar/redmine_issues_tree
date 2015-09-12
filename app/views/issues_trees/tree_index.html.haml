@@ -14,54 +14,48 @@
 
   = call_hook(:view_issues_tree_index_contextual,
               {issues: @issues, project: @project, query: @query})
-%br
-%br
+
+%h2
+  = @query.new_record? ? l(:label_issue_plural) : h(@query.name)
 
 - html_title(@query.new_record? ? l(:label_issue_plural) : @query.name)
 
 = form_tag({controller: :issues_trees,
             action: :tree_index,
             project_id: @project},
-            method: :get, id: 'query_form',
+            method: :get,
+            id: 'query_form',
             class: 'redmine-query-form issues-tree-index-form',
             data: @tree_data) do
-  = hidden_field_tag 'set_filter', '1'
-  %div{id: 'query_form_content', class: 'hide-when-print'}
-    %fieldset{id: 'filters', class: "collapsible #{@query.new_record? ? '' : 'collapsed'}"}
-      %legend{onclick: 'toggleFieldset(this);'}
-        = l(:label_filter_plural)
-      %div{style: "#{@query.new_record? ? '' : 'display: none;'}"}
-        = render partial: 'queries/filters', locals: {query: @query}
-    %fieldset{class: 'collapsible collapsed'}
-      %legend{onclick: 'toggleFieldset(this);'}
-        = l(:label_options)
-      %div{style: 'display: none;'}
-        %table
-          %tr
-            %td
-              = l(:field_column_names)
-            %td
-              = render_query_columns_selection(@query)
-          %tr
-            %td
-              %label{for: 'group_by'}
-              = l(:field_group_by)
-            %td
-              = select_tag('group_by',
-                            options_for_select([[]] + @query.groupable_columns.collect {|c| [c.caption, c.name.to_s]},
-                                               @query.group_by))
-          %tr
-            %td
-              = l(:button_show)
-            %td
-              = available_block_columns_tags(@query)
-  %p{class: 'buttons hide-when-print'}
-
-    = link_to_function l(:button_apply), '$("#query_form").submit()', class: 'icon icon-checked'
-    - if @query.new_record? && User.current.allowed_to?(:save_queries, @project, global: true)
-      = link_to_function l(:button_save),
-                         "$('#query_form').attr('action', '#{ @project ? new_project_query_path(@project) : new_query_path }'); submit_query_form('query_form')",
-                         class: 'icon icon-save'
+  %div#query_form_content.hide-when-print
+    = hidden_field_tag 'set_filter', '1'
+    %div#query_form_content
+      %fieldset{id: 'filters', class: "collapsible #{@query.new_record? ? '' : 'collapsed'}"}
+        %legend{onclick: 'toggleFieldset(this);'}
+          = l(:label_filter_plural)
+        %div{style: "#{@query.new_record? ? '' : 'display: none;'}"}
+          = render partial: 'queries/filters', locals: {query: @query}
+      %fieldset.collapsible.collapsed
+        %legend{onclick: 'toggleFieldset(this);'}
+          = l(:label_options)
+        %div{style: 'display: none;'}
+          %table
+            %tr
+              %td
+                = l(:field_column_names)
+              %td
+                = render_query_columns_selection(@query)
+            %tr
+              %td
+                = l(:button_show)
+              %td
+                = available_block_columns_tags(@query)
+    %p.buttons
+      = link_to_function l(:button_apply), '$("#query_form").submit()', class: 'icon icon-checked'
+      - if @query.new_record? && User.current.allowed_to?(:save_queries, @project, global: true)
+        = link_to_function l(:button_save),
+                           "$('#query_form').attr('action', '#{ @project ? new_project_query_path(@project) : new_query_path }').submit()",
+                           class: 'icon icon-save'
 
 = error_messages_for 'query'
 - if @query.valid?

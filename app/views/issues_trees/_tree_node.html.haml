@@ -10,6 +10,7 @@
 
   %td.id
     = link_to issue.id, controller: 'issues', action: 'show', id: issue
-  - query.columns.each do |column|
+  - cols = query.inline_columns.map do |column|
     - unless column.value(issue) == issue.id
-      = content_tag 'td', column_content(column, issue), class: column.css_classes
+      - content_tag 'td', column_content(column, issue), class: column.css_classes
+  = raw cols.join
