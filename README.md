@@ -4,7 +4,7 @@ This is a plugin for [Redmine](http://www.redmine.org/). It's provides a tree vi
 
 ## Compatibility
 
-This branch of plugin tested with `2.6.6` version of the Redmine. But there is a high probability of compatibility with other 2.* versions.
+This branch of plugin tested with `2.5.3` version of the Redmine. But there is a high probability of compatibility with other 2.* versions.
 If you have other version of the Redmine (for example, `3.*`), please, select another branch of this plugin.
 
 ## Examples of interface
