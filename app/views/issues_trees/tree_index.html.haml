@@ -65,7 +65,7 @@
   - else
     = render partial: 'issues_trees/tree_list', locals: {issues: @issues, query: @query}
 
-= call_hook(:view_issues_index_bottom, {issues: @issues, project: @project, query: @query})
+= call_hook(:view_issues_tree_index_bottom, {issues: @issues, project: @project, query: @query})
 
 - content_for :sidebar do
   = render partial: 'issues/sidebar'
