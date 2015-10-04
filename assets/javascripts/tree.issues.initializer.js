@@ -15,7 +15,7 @@ $( document ).ready(function() {
       // Render loader/spinner while loading
       $.ajax({
         async: false, // Must be false, otherwise loadBranch happens after showChildren?
-        url: $form.data('urlForLoadTreeChildren') + node.id + $form.data('actionForLoadTreeChildren'),
+        url: $form.data('urlForLoadTreeChildren').replace($form.data('issueIdTemplate'), node.id),
         data: {query_params: $form.data('queryParams')}
       }).done(function(html) {
         var rows = $(html).filter("tr");
