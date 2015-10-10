@@ -69,8 +69,6 @@ class IssuesTreesController < ApplicationController
   # Redirect with proper params from serialized form
   def redirect_with_params
     params_for_redirect = params.reject{|k, _| [:action, :controller, :utf8].include?(k.to_sym)}
-    render json: {redirect: url_for(controller: :issues_trees,
-                                    action: :tree_index,
-                                    params: params_for_redirect)}
+    render json: {redirect: tree_index_project_issues_trees_path(params_for_redirect)}
   end
 end
