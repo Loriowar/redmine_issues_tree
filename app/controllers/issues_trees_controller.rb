@@ -8,14 +8,15 @@ class IssuesTreesController < ApplicationController
   # Action for the issues tree view
   def tree_index
     @project = Project.where(identifier: params[:project_id]).first
-    # group operation is prohibited for the tree view; filling a warning message
-    if params[:group_by].present?
-      flash[:error] = l(:unable_to_group_in_tree_view, scope: 'issues_tree.errors')
-    end
-    # removing params for grouping
-    params.reject!{|k, _| k.to_sym == :group_by}
 
     retrieve_query
+
+    # group operation is prohibited for the tree view; filling a warning message
+    if @query.group_by.present?
+      flash[:error] = l(:unable_to_group_in_tree_view, scope: 'issues_tree.errors')
+      @query.group_by = nil
+    end
+
     sort_init(@query.sort_criteria.empty? ? [['id', 'desc']] : @query.sort_criteria)
     sort_update(@query.sortable_columns)
     @query.sort_criteria = sort_criteria.to_a
@@ -46,13 +47,14 @@ class IssuesTreesController < ApplicationController
   # Retrieve a first level of a nested (children) issues
   def tree_children
     @project = Project.where(identifier: params[:project_id]).first
-
     # merge for proper work of retrieve_query
     params.merge!(params[:query_params])
-    # group action is incompatible with tree view, so removing group_by param
-    params.reject!{|k, _| k.to_sym == :group_by}
 
     retrieve_query
+
+    # group action is incompatible with tree view, so remove group_by option
+    @query.group_by = nil if @query.group_by.present?
+
     sort_init(@query.sort_criteria.empty? ? [['id', 'desc']] : @query.sort_criteria)
     sort_update(@query.sortable_columns)
     @query.sort_criteria = sort_criteria.to_a
