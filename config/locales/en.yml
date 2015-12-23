@@ -4,6 +4,6 @@ en:
     tree_view: Tree view
     expand_current_nodes: Expand next level
     collapse_all: Collapse all
-    back_to_plain_list: Plain structire
+    back_to_plain_list: Plain structure
     errors:
       unable_to_group_in_tree_view: Unagle to group in tree view
