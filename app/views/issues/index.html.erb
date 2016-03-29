@@ -47,6 +47,10 @@
             <td><%= l(:button_show) %></td>
             <td><%= available_block_columns_tags(@query) %></td>
           </tr>
+          <tr>
+            <td><%= l(:label_total_plural) %></td>
+            <td><%= available_totalable_columns_tags(@query) %></td>
+          </tr>
         </table>
       </div>
     </fieldset>
@@ -68,8 +72,9 @@
 <% if @issues.empty? %>
 <p class="nodata"><%= l(:label_no_data) %></p>
 <% else %>
+<%= render_query_totals(@query) %>
 <%= render :partial => 'issues/list', :locals => {:issues => @issues, :query => @query} %>
-<p class="pagination"><%= pagination_links_full @issue_pages, @issue_count %></p>
+<span class="pagination"><%= pagination_links_full @issue_pages, @issue_count %></span>
 <% end %>
 
 <% other_formats_links do |f| %>
@@ -82,11 +87,11 @@
   <h3 class="title"><%= l(:label_export_options, :export_format => 'CSV') %></h3>  
   <%= form_tag(params.merge({:format => 'csv',:page=>nil}), :method => :get, :id => 'csv-export-form') do %>
   <p>
-    <label><%= radio_button_tag 'columns', '', true %> <%= l(:description_selected_columns) %></label><br />
-    <label><%= radio_button_tag 'columns', 'all' %> <%= l(:description_all_columns) %></label>
+    <label><%= radio_button_tag 'csv[columns]', '', true %> <%= l(:description_selected_columns) %></label><br />
+    <label><%= radio_button_tag 'csv[columns]', 'all' %> <%= l(:description_all_columns) %></label>
   </p>
   <p>
-    <label><%= check_box_tag 'description', '1', @query.has_column?(:description) %> <%= l(:field_description) %></label>
+    <label><%= check_box_tag 'csv[description]', '1', @query.has_column?(:description) %> <%= l(:field_description) %></label>
   </p>
   <% if @issue_count > Setting.issues_export_limit.to_i %>
   <p class="icon icon-warning">

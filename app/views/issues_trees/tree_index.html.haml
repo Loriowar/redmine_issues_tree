@@ -50,6 +50,11 @@
                 = l(:button_show)
               %td
                 = available_block_columns_tags(@query)
+            %tr
+              %td
+                = l(:label_total_plural)
+              %td
+                = available_totalable_columns_tags(@query)
     %p.buttons
       = link_to_function l(:button_apply), '$("#query_form").submit()', class: 'icon icon-checked'
       - if @query.new_record? && User.current.allowed_to?(:save_queries, @project, global: true)
