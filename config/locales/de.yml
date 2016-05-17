@@ -1,0 +1,8 @@
+de:
+  issues_tree:
+    tree_view: Baumansicht
+    expand_current_nodes: Nächste Ebene aufklappen
+    collapse_all: Alles zuklappen
+    back_to_plain_list: Flache Ansicht
+    errors:
+      unable_to_group_in_tree_view: Es ist keine Gruppierung in der Baumansicht möglich
