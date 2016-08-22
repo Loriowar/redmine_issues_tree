@@ -8,9 +8,8 @@
 
 
 %div.contextual
-  - if !@query.new_record? && @query.editable_by?(User.current)
-    = link_to l(:button_edit), edit_query_path(@query), class: 'icon icon-edit'
-    = delete_link query_path(@query)
+  - if User.current.allowed_to?(:add_issues, @project, :global => true) && (@project.nil? || Issue.allowed_target_trackers(@project).any?)
+    = link_to l(:label_issue_new), _new_project_issue_path(@project), :class => 'icon icon-add new-issue'
 
   = call_hook(:view_issues_tree_index_contextual,
               {issues: @issues, project: @project, query: @query})
@@ -35,18 +34,18 @@
           = l(:label_filter_plural)
         %div{style: "#{@query.new_record? ? '' : 'display: none;'}"}
           = render partial: 'queries/filters', locals: {query: @query}
-      %fieldset.collapsible.collapsed
+      %fieldset#options.collapsible.collapsed
         %legend{onclick: 'toggleFieldset(this);'}
           = l(:label_options)
         %div{style: 'display: none;'}
           %table
             %tr
-              %td
+              %td.field
                 = l(:field_column_names)
               %td
                 = render_query_columns_selection(@query)
             %tr
-              %td
+              %td.field
                 = l(:button_show)
               %td
                 = available_block_columns_tags(@query)
@@ -57,10 +56,15 @@
                 = available_totalable_columns_tags(@query)
     %p.buttons
       = link_to_function l(:button_apply), '$("#query_form").submit()', class: 'icon icon-checked'
-      - if @query.new_record? && User.current.allowed_to?(:save_queries, @project, global: true)
-        = link_to_function l(:button_save),
-                           "$('#query_form').attr('action', '#{ @project ? new_project_query_path(@project) : new_query_path }').submit()",
-                           class: 'icon icon-save'
+      - if @query.new_record?
+        - if User.current.allowed_to?(:save_queries, @project, global: true)
+          = link_to_function l(:button_save),
+                             "$('#query_form').attr('action', '#{ @project ? new_project_query_path(@project) : new_query_path }').submit()",
+                             class: 'icon icon-save'
+      - else
+        - if @query.editable_by?(User.current)
+          = link_to l(:button_edit), edit_query_path(@query), :class => 'icon icon-edit'
+          = delete_link query_path(@query)
 
 = error_messages_for 'query'
 - if @query.valid?
