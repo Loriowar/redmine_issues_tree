@@ -1,0 +1,9 @@
+# Simplified Chinese strings go here for Rails i18n
+zh:
+  issues_tree:
+    tree_view: 树状视图
+    expand_current_nodes: 展开下一级
+    collapse_all: 全部收拢
+    back_to_plain_list: 扁平结构
+    errors:
+      unable_to_group_in_tree_view: 无法以树状视图分组
