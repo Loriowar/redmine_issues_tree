@@ -5,4 +5,4 @@ en:
     collapse_all: Collapse all
     back_to_plain_list: Plain structire
     errors:
-      unable_to_group_in_tree_view: Unagle to group in tree view
+      unable_to_group_in_tree_view: Unable to group in tree view
