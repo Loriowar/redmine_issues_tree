@@ -5,6 +5,8 @@ class IssuesTreesController < ApplicationController
   include SortHelper
   helper :issues
 
+  menu_item :issues, only: :tree_index
+
   # Action for the issues tree view
   def tree_index
     @project = Project.where(identifier: params[:project_id]).first
