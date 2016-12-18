@@ -7,10 +7,11 @@ class IssuesTreesController < ApplicationController
 
   menu_item :issues, only: :tree_index
 
+  # This filter, additionally, checks permissions in a project
+  before_filter :find_optional_project, only: [:tree_index, :tree_children, :redirect_with_params]
+
   # Action for the issues tree view
   def tree_index
-    @project = Project.where(identifier: params[:project_id]).first
-
     retrieve_query
 
     # group operation is prohibited for the tree view; filling a warning message
@@ -48,7 +49,6 @@ class IssuesTreesController < ApplicationController
 
   # Retrieve a first level of a nested (children) issues
   def tree_children
-    @project = Project.where(identifier: params[:project_id]).first
     # merge for proper work of retrieve_query
     params.merge!(params[:query_params])
 
