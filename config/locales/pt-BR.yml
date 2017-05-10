@@ -1,0 +1,8 @@
+"pt-BR":
+  issues_tree:
+    tree_view: Agrupar Itens
+    expand_current_nodes: Expandir Próximo Nível
+    collapse_all: Fechar Todos
+    back_to_plain_list: Desagrupar
+    errors:
+      unable_to_group_in_tree_view: Não é possível agrupar a visualização
