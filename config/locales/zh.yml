@@ -7,3 +7,5 @@ zh:
     back_to_plain_list: 扁平结构
     errors:
       unable_to_group_in_tree_view: 无法以树状视图分组
+    settings:
+      default_redirect_to_tree_view: [TRANSLATE ME] Set a tree view as a default index page for issues (this can be very slowly in case of project with >1000 issues)
