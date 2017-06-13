@@ -12,5 +12,5 @@
     = link_to issue.id, controller: 'issues', action: 'show', id: issue
   - cols = query.inline_columns.map do |column|
     - unless column.value(issue) == issue.id
-      - content_tag 'td', column_content(column, issue), class: column.css_classes
+      - "<td class=\"#{column.css_classes}\">#{column_content(column, issue)}</td>"
   = raw cols.join
