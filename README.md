@@ -6,9 +6,14 @@ This is a plugin for [Redmine](http://www.redmine.org/). It's provides a tree vi
 
 Plugin tested with `3.3.*`, `3.2.*`, `3.1.*`, `3.0.*`, `2.6.*` and `2.5.*` versions of Redmine.
 
+## Support
+
+Features are added only for `3.x` version. Bugfix and locales available for all version from `2.6.x` and higer. 
+
 ## Usage
 
-This is a `master` branch, please, use a branch with name corresponding to your Redmine version.
+This is a `master` branch. DO NOT USE THIS BRANCH. Please, use a branch with name corresponding to your
+Redmine version i.e. `3.3.x`, `3.2.x` and so on.
 
 ## Examples of interface
 
