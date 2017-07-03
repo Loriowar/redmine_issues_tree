@@ -16,7 +16,7 @@ class IssuesTreesController < ApplicationController
 
     # group operation is prohibited for the tree view; filling a warning message
     if @query.group_by.present?
-      flash[:error] = l(:unable_to_group_in_tree_view, scope: 'issues_tree.errors')
+      flash[:warning] = l(:unable_to_group_in_tree_view, scope: 'issues_tree.errors')
       @query.group_by = nil
     end
 
