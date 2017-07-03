@@ -9,7 +9,7 @@ module RedmineIssuesTree::IssuesControllerPatch
     skip_issues_tree_redirect = params.delete(:skip_issues_tree_redirect)
 
     # @note: do not change behaviour of issues#index for all projects
-    if Setting.plugin_redmine_issues_tree[:default_redirect_to_tree_view] && params[:project_id].present?
+    if Setting.plugin_redmine_issues_tree[:default_redirect_to_tree_view] == 'true' && params[:project_id].present?
       # @note: add additional parameter into all links on issues#index looks not so good as parsing a referer
       if skip_issues_tree_redirect == 'true' || URI(request.referer).path == project_issues_path
         index_without_redmine_issues_tree
