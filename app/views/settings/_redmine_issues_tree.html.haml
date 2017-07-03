@@ -1,4 +1,5 @@
 %p
   %label
     = l(:'issues_tree.settings.default_redirect_to_tree_view')
-  = check_box_tag 'settings[default_redirect_to_tree_view]', true, @settings['default_redirect_to_tree_view']
+  = hidden_field_tag 'settings[default_redirect_to_tree_view]', false
+  = check_box_tag 'settings[default_redirect_to_tree_view]', true, @settings['default_redirect_to_tree_view'] == 'true'
