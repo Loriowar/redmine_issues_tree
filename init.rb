@@ -10,7 +10,7 @@ Redmine::Plugin.register plugin_name do
   url 'https://github.com/Loriowar/redmine_issues_tree'
   author_url 'https://github.com/Loriowar'
 
-  settings partial: 'settings/redmine_issues_tree', default: { 'default_redirect_to_tree_view' => false }
+  settings partial: 'settings/redmine_issues_tree', default: { 'default_redirect_to_tree_view' => 'false' }
 end
 
 Rails.configuration.to_prepare do
