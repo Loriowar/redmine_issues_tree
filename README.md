@@ -1,10 +1,28 @@
 # RedmineIssuesTree [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KGN52ZXA8J7B8)
 
 This is a plugin for [Redmine](http://www.redmine.org/). It's provides a tree view of the issues list.
+[Official page on Redmine.org](https://www.redmine.org/plugins/redmine_issues_tree).
 
 ## Compatibility
 
-This branch of plugin tested with `3.3.x` version of the Redmine.
+Plugin tested with `3.4.*`, `3.3.*`, `3.2.*`, `3.1.*`, `3.0.*`, `2.6.*` and `2.5.*` versions of Redmine.
+But this branch of plugin must be used only with Redmine `3.4.x`. 
+
+## Features
+
+* Dynamically loading of nested issues by click.
+* Minimal changes in default plain issues index page.
+* Tree view available in context of project and in global scope of all projects.
+* Plugin has setting (in admin menu) to enable a tree_view as a standard view for all issues#index page. Keep in mind what
+speed of this feature related with amount of issues in project and in case of >1000 issues this can work drastically slow.
+
+## Support
+
+Features are added only for `3.x` version. Bugfix and locales available for all version from `2.6.x` and higer. 
+
+## Usage
+
+This branch of plugin tested with `3.4.x` version of the Redmine.
 If you have other version of the Redmine (for example, `2.*`), please, select another branch of this plugin.
 
 ## Examples of interface
@@ -17,7 +35,7 @@ Use a common Redmine [installation guide](http://www.redmine.org/projects/redmin
 This plugin hasn't any migration. So, you just need to copy source code into a proper folder and
 run `bundle` for install required gems.
 
-## Features
+## Information for developers and contributors
 
 * Plugin based on one of the modification of the [jQueryTreetable](https://github.com/ludo/jquery-treetable) library.
 This lib can be found [here](https://github.com/Loriowar/jquery-treetable/tree/multiline_cell_fix).
