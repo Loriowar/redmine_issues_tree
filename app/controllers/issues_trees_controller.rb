@@ -9,11 +9,6 @@ class IssuesTreesController < ApplicationController
   # This filter, additionally, checks permissions in a project
   before_action :find_optional_project, only: [:tree_index, :tree_children, :redirect_with_params]
 
-  menu_item :issues, only: :tree_index
-
-  # This filter, additionally, checks permissions in a project
-  before_filter :find_optional_project, only: [:tree_index, :tree_children, :redirect_with_params]
-
   # Action for the issues tree view
   def tree_index
     retrieve_query
