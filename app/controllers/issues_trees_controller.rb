@@ -1,9 +1,13 @@
 class IssuesTreesController < ApplicationController
   helper :queries
   include QueriesHelper
-  helper :sort
-  include SortHelper
   helper :issues
+  helper :versions
+
+  menu_item :issues, only: :tree_index
+
+  # This filter, additionally, checks permissions in a project
+  before_action :find_optional_project, only: [:tree_index, :tree_children, :redirect_with_params]
 
   menu_item :issues, only: :tree_index
 
@@ -19,10 +23,6 @@ class IssuesTreesController < ApplicationController
       flash[:error] = l(:unable_to_group_in_tree_view, scope: 'issues_tree.errors')
       @query.group_by = nil
     end
-
-    sort_init(@query.sort_criteria.empty? ? [['id', 'desc']] : @query.sort_criteria)
-    sort_update(@query.sortable_columns)
-    @query.sort_criteria = sort_criteria.to_a
 
     query_params = params.reject{|k, _| [:action, :controller, :utf8].include?(k.to_sym)}
     # template for substitute in js due to absence path-helper in it
@@ -47,9 +47,7 @@ class IssuesTreesController < ApplicationController
 
     if @issues_ids.present?
       # selecting a root elements for a current query
-      @issues = @query.issues(conditions: "issues.parent_id NOT IN (#{@issues_ids.join(', ')}) OR issues.parent_id IS NULL",
-                              include: [:assigned_to, :tracker, :priority, :category, :fixed_version],
-                              order: sort_clause)
+      @issues = @query.issues(conditions: "issues.parent_id NOT IN (#{@issues_ids.join(', ')}) OR issues.parent_id IS NULL")
     else
       @issues = []
     end
@@ -64,16 +62,8 @@ class IssuesTreesController < ApplicationController
 
     # group action is incompatible with tree view, so remove group_by option
     @query.group_by = nil if @query.group_by.present?
-
-    sort_init(@query.sort_criteria.empty? ? [['id', 'desc']] : @query.sort_criteria)
-    sort_update(@query.sortable_columns)
-    @query.sort_criteria = sort_criteria.to_a
-
     @issues_ids = @query.issues.collect(&:id)
-
-    @issues = @query.issues(conditions: "issues.parent_id = #{params[:id]}",
-                            include: [:assigned_to, :tracker, :priority, :category, :fixed_version],
-                            order: sort_clause)
+    @issues = @query.issues(conditions: "issues.parent_id = #{params[:id]}")
 
     render layout: false
   end
