@@ -8,4 +8,4 @@ zh-TW:
     errors:
       unable_to_group_in_tree_view: 無法以樹狀視圖分組
     settings:
-      default_redirect_to_tree_view: [TRANSLATE ME] Set a tree view as a default index page for issues (this can be very slowly in case of project with >1000 issues)
+      default_redirect_to_tree_view: "[TRANSLATE ME] Set a tree view as a default index page for issues (this can be very slowly in case of project with >1000 issues)"
