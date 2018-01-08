@@ -2,7 +2,7 @@ $( document ).ready(function() {
   $(".issues-tree-view-link").on('click', function(e) {
     e.preventDefault();
 
-    selectAllOptions("selected_columns");
+    jQuery("#selected_c option").prop('selected', true);
 
     $.ajax({
       type: "POST",
@@ -17,9 +17,4 @@ $( document ).ready(function() {
       }
     });
   });
-
-  function selectAllOptions(id) {
-    var $select = $('#'+id);
-    $select.children('option').attr('selected', true);
-  }
 });
