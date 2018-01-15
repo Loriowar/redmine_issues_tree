@@ -9,8 +9,8 @@
     = check_box_tag('ids[]', issue.id, false, id: nil)
 
   %td.id
-    = link_to issue.id, controller: 'issues', action: 'show', id: issue
+    = link_to issue.to_param, controller: 'issues', action: 'show', id: issue
   - cols = query.inline_columns.map do |column|
-    - unless column.value(issue) == issue.id
+    - unless column.value(issue).to_s == issue.to_param
       - "<td class=\"#{column.css_classes}\">#{column_content(column, issue)}</td>"
   = raw cols.join
