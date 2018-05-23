@@ -4,10 +4,8 @@
     data-tt-parent-id="<%= issue.parent_id %>">
   <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", issue.id, false, :id => nil) %></td>
   <td class="id"><%= link_to issue.to_param, controller: 'issues', action: 'show', id: issue %></td>
-  <% query.inline_columns.each do |column| %>
-    <% unless column.value(issue).to_s == issue.to_param %>
-      <%= content_tag('td', column_content(column, issue), :class => column.css_classes) %>
-    <% end %>
+  <% query.inline_columns.reject { |c| c.name == :id }.each do |column| %>
+    <%= content_tag('td', column_content(column, issue), :class => column.css_classes) %>
   <% end %>
 </tr>
 <% query.block_columns.each do |column|
