@@ -7,4 +7,6 @@ ru:
     errors:
       unable_to_group_in_tree_view: Невозможно группировать записи при древовидном отображении
     settings:
-      default_redirect_to_tree_view: По-умолчанию отображать задачи в древовидной форме (может сильно тормозить в проектах с >1000 задач)
+      default_redirect_to_issues_tree_view: "[TRANSLATE ME] Set a tree view as a default index page for all issues (enable this could be very slowly in case of with many issues)"
+      default_redirect_to_project_issues_tree_view: По-умолчанию отображать задачи в древовидной форме (может сильно тормозить в проектах с >1000 задач)
+

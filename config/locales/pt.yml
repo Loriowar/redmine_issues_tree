@@ -7,4 +7,6 @@ pt:
     errors:
       unable_to_group_in_tree_view: Não é possível agrupar a visualização
     settings:
-      default_redirect_to_tree_view: Defina uma visão em árvore como uma página de índice padrão para problemas (isso pode ser muito lento em caso de projeto com mais de 1000 problemas)
+      default_redirect_to_issues_tree_view: "[TRANSLATE ME] Set a tree view as a default index page for all issues (enable this could be very slowly in case of with many issues)"
+      default_redirect_to_project_issues_tree_view: Defina uma visão em árvore como uma página de índice padrão para problemas (isso pode ser muito lento em caso de projeto com mais de 1000 problemas)
+

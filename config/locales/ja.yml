@@ -7,4 +7,6 @@ ja:
     errors:
       unable_to_group_in_tree_view: ツリー表示でグループ化できませんでした
     settings:
-      default_redirect_to_tree_view: チケットの初期表示をツリー表示に設定する (これは1000より多くのチケットがある場合、非常に遅くなります)
+      default_redirect_to_issues_tree_view: "[TRANSLATE ME] Set a tree view as a default index page for all issues (enable this could be very slowly in case of with many issues)"
+      default_redirect_to_project_issues_tree_view: チケットの初期表示をツリー表示に設定する (これは1000より多くのチケットがある場合、非常に遅くなります)
+
