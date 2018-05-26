@@ -7,4 +7,5 @@ en:
     errors:
       unable_to_group_in_tree_view: Unable to group in tree view
     settings:
-      default_redirect_to_tree_view: Set a tree view as a default index page for issues (this can be very slowly in case of project with >1000 issues)
+      default_redirect_to_issues_tree_view: Set a tree view as a default index page for all issues (enable this could be very slowly in case of with many issues)
+      default_redirect_to_project_issues_tree_view: Set a tree view as default for project issues (this can be very slowly in case of project with >1000 issues)
