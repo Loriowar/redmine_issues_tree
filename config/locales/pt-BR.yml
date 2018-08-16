@@ -1,11 +1,11 @@
 pt-BR:
   issues_tree:
-    tree_view: Agrupar Itens
-    expand_current_nodes: Expandir Próximo Nível
-    collapse_all: Fechar Todos
-    back_to_plain_list: Desagrupar
+    tree_view: Agrupar tarefas
+    expand_current_nodes: Expandir um nível
+    collapse_all: Retrair todos
+    back_to_plain_list: Desagrupar tarefas
     errors:
-      unable_to_group_in_tree_view: Não é possível agrupar a visualização
+      unable_to_group_in_tree_view: Não foi possível agrupar as tarefas
     settings:
-      default_redirect_to_tree_view: Defina uma visão em árvore como uma página de índice padrão para problemas (isso pode ser muito lento em caso de projeto com mais de 1000 problemas)
-      default_redirect_to_tree_view_without_project: "[TRANSLATE ME] Set a tree view as a default index page for issues without project scope (this can be very slowly on installation with >1000 issues)"
+      default_redirect_to_tree_view: Agrupar por padrão nas páginas de tarefas dos projetos (pode ficar muito lento em caso de projetos com mais de 1000 tarefas)
+      default_redirect_to_tree_view_without_project: Agrupar por padrão na página de tarefas fora do escopo de projetos (pode ficar muito lento em instalações com mais de 1000 tarefas)
