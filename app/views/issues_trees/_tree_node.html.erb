@@ -8,6 +8,7 @@
   <% query.inline_columns.reject { |c| %i(id issue_id).include?(c.name) }.each do |column| %>
     <%= content_tag('td', column_content(column, issue), :class => column.css_classes) %>
   <% end %>
+  <td class="buttons"><%= link_to_context_menu %></td>
 </tr>
 <% query.block_columns.each do |column|
   if (text = column_content(column, issue)) && text.present? -%>
