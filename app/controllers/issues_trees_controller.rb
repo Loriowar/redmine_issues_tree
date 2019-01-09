@@ -51,7 +51,7 @@ class IssuesTreesController < ApplicationController
   # Retrieve a first level of a nested (children) issues
   def tree_children
     # merge for proper work of retrieve_query
-    params.merge!(params[:query_params])
+    params.permit!.merge!(params[:query_params])
 
     retrieve_query
 
@@ -65,7 +65,7 @@ class IssuesTreesController < ApplicationController
 
   # Redirect with proper params from serialized form
   def redirect_with_params
-    params_for_redirect = params.reject{|k, _| [:action, :controller, :utf8].include?(k.to_sym)}
+    params_for_redirect = params.reject{|k, _| [:action, :controller, :utf8].include?(k.to_sym)}.permit!
     if @project.present?
       render json: {redirect: tree_index_project_issues_trees_path(params_for_redirect)}
     else
