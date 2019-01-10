@@ -5,8 +5,8 @@ This is a plugin for [Redmine](http://www.redmine.org/). It's provides a tree vi
 
 ## Compatibility
 
-Plugin tested with `3.4.*`, `3.3.*`, `3.2.*`, `3.1.*`, `3.0.*`, `2.6.*` and `2.5.*` versions of Redmine.
-But this branch of plugin must be used only with Redmine `3.4.x`. 
+Plugin tested with `4.0.x`, `3.4.x`, `3.3.x`, `3.2.x`, `3.1.x`, `3.0.x`, `2.6.x` and `2.5.x` versions of Redmine.
+But this branch of plugin must be used only with Redmine `4.0.x`. 
 
 ## Features
 
@@ -18,11 +18,11 @@ speed of this feature related with amount of issues in project and in case of >1
 
 ## Support
 
-Features are added only for `3.x` version. Bugfix and locales available for all version from `2.6.x` and higer. 
+Features are added only for `3.x` and `4.x` versions. Bugfix and locales available for all version from `2.6.x` and higher. 
 
 ## Usage
 
-This branch of plugin tested with `3.4.x` version of the Redmine.
+This branch of plugin tested with `4.0.x` version of the Redmine.
 If you have other version of the Redmine (for example, `2.*`), please, select another branch of this plugin.
 
 ## Examples of interface
