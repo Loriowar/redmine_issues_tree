@@ -1,0 +1,10 @@
+"pt-BR":
+  issues_tree:
+    tree_view: Agrupar Itens
+    expand_current_nodes: Expandir Próximo Nível
+    collapse_all: Fechar Todos
+    back_to_plain_list: Desagrupar
+    errors:
+      unable_to_group_in_tree_view: Não é possível agrupar a visualização
+    settings:
+      default_redirect_to_tree_view: [TRANSLATE ME] Set a tree view as a default index page for issues (this can be very slowly in case of project with >1000 issues)

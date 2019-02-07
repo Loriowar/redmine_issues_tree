@@ -24,7 +24,7 @@
             project_id: @project},
             method: :get,
             id: 'query_form',
-            class: 'redmine-query-form issues-tree-index-form',
+            class: 'issues-tree-index-form',
             data: @tree_data) do
   %div#query_form_with_buttons.hide-when-print
     = hidden_field_tag 'set_filter', '1'
@@ -79,4 +79,4 @@
 - content_for :sidebar do
   = render partial: 'issues/sidebar'
 
-= context_menu issues_context_menu_path
+= context_menu

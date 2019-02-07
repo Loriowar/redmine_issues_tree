@@ -1,5 +1,5 @@
 - tr_data = {:'tt-id'        => "#{issue.id}",
-             :'tt-branch'    => "#{issue.children_in_range?(issues_ids) ? 'true' : 'false'}",
+             :'tt-branch'    => "#{issue.children.where(id: issues_ids).any? ? 'true' : 'false'}",
              :'tt-parent-id' => "#{issue.parent_id}"}
 
 %tr{id: "issue-#{issue.id}",
@@ -12,5 +12,5 @@
     = link_to issue.id, controller: 'issues', action: 'show', id: issue
   - cols = query.inline_columns.map do |column|
     - unless column.value(issue) == issue.id
-      - content_tag 'td', column_content(column, issue), class: column.css_classes
+      - "<td class=\"#{column.css_classes}\">#{column_content(column, issue)}</td>"
   = raw cols.join
