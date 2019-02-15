@@ -7,4 +7,4 @@ cs:
     errors:
       unable_to_group_in_tree_view: Nelze seskupit do stromového pohledu
     settings:
-      default_redirect_to_tree_view: [TRANSLATE ME] Set a tree view as a default index page for issues (this can be very slowly in case of project with >1000 issues)
+      default_redirect_to_tree_view: Nastavit stromový pohled jako výchozí pro úkoly (může být velmi pomalé pro projekty s více než 1000 úkoly)
