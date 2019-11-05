@@ -2,9 +2,15 @@ module RedmineIssuesTree::IssuesControllerPatch
   def index
     if request.format.html?
       skip_issues_tree_redirect = params.delete(:skip_issues_tree_redirect)
+      settings =
+        Setting.
+          plugin_redmine_issues_tree.
+          permit(:default_redirect_to_tree_view, :default_redirect_to_tree_view_without_project).
+          to_h.
+          with_indifferent_access
 
       if params[:project_id].present?
-        if Setting.plugin_redmine_issues_tree.with_indifferent_access[:default_redirect_to_tree_view] == 'true'
+        if settings[:default_redirect_to_tree_view] == 'true'
           # @note: add additional parameter into all links on issues#index looks not so good as parsing a referer
           # @reason: we must prevent redirect to the tree_view if we do some actions on a plain view
           if skip_issues_tree_redirect == 'true' || URI(request.referer).path == project_issues_path
@@ -16,7 +22,7 @@ module RedmineIssuesTree::IssuesControllerPatch
           super
         end
       else
-        if Setting.plugin_redmine_issues_tree.with_indifferent_access[:default_redirect_to_tree_view_without_project] == 'true'
+        if settings[:default_redirect_to_tree_view_without_project] == 'true'
           # @note: add additional parameter into all links on issues#index looks not so good as parsing a referer
           # @reason: we must prevent redirect to the tree_view if we do some actions on a plain view
           if skip_issues_tree_redirect == 'true' || URI(request.referer).path == issues_path
