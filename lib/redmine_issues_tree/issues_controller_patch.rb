@@ -2,12 +2,7 @@ module RedmineIssuesTree::IssuesControllerPatch
   def index
     if request.format.html?
       skip_issues_tree_redirect = params.delete(:skip_issues_tree_redirect)
-      settings =
-        Setting.
-          plugin_redmine_issues_tree.
-          permit(:default_redirect_to_tree_view, :default_redirect_to_tree_view_without_project).
-          to_h.
-          with_indifferent_access
+      settings = Setting.plugin_redmine_issues_tree.to_h.with_indifferent_access
 
       if params[:project_id].present?
         if settings[:default_redirect_to_tree_view] == 'true'
