@@ -1,0 +1,8 @@
+fr:
+  issues_tree:
+    tree_view: Vue arborescente
+    expand_current_nodes: Développer le niveau suivant
+    collapse_all: Réduire tout
+    back_to_plain_list: Vue simple
+    errors:
+      unable_to_group_in_tree_view: Impossible de regrouper dans l'arborescence
