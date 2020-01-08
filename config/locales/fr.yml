@@ -1,0 +1,11 @@
+fr:
+  issues_tree:
+    tree_view: Vue arborescente
+    expand_current_nodes: Développer le niveau suivant
+    collapse_all: Réduire tout
+    back_to_plain_list: Vue simple
+    errors:
+      unable_to_group_in_tree_view: Impossible de regrouper dans l'arborescence
+    settings:
+      default_redirect_to_tree_view: Définir une arborescence comme page d'index par défaut pour les demandes (cela peut être très lent pour les projets avec plus de 1000 tickets)
+      default_redirect_to_tree_view_without_project: Définir une arborescence comme page d'index par défaut pour les demandes non liées à un projet (cela peut être très lent lors de l'installation lorsqu'il y plus 1000 tickets)
