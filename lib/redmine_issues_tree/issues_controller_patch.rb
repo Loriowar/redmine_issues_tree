@@ -2,7 +2,10 @@ module RedmineIssuesTree::IssuesControllerPatch
   extend ActiveSupport::Concern
 
   included do
-    alias_method_chain :index, :redmine_issues_tree
+    # alias_method_chain :index, :redmine_issues_tree
+
+    alias_method :index_without_redmine_issues_tree, :index
+    alias_method :index, :index_with_redmine_issues_tree    
   end
 
   def index_with_redmine_issues_tree
