@@ -51,7 +51,7 @@ class IssuesTreesController < ApplicationController
   # Retrieve a first level of a nested (children) issues
   def tree_children
     # merge for proper work of retrieve_query
-    params.merge!(params[:query_params])
+    params.merge!(params.to_unsafe_h[:query_params])
 
     retrieve_query
 

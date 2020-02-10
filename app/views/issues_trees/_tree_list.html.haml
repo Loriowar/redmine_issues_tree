@@ -9,7 +9,7 @@
          onclick: "jQuery('#'+'#{tree_id}').treetable('collapseAll');"}
 
 = form_tag({}, data: {cm_url: issues_context_menu_path}) do
-  = hidden_field_tag 'back_url', url_for(params), id: nil
+  = hidden_field_tag 'back_url', url_for(params.to_unsafe_h), id: nil
   %div.autoscroll
     %table{class: 'list issues', id: tree_id}
       %thead
