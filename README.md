@@ -5,6 +5,10 @@ This is a plugin for [Redmine](http://www.redmine.org/). It's provides a tree vi
 
 ## Compatibility
 
+**!!!DO NOT USE THIS BRANCH!!!**
+Please, use a branch with name corresponding to your
+Redmine version i.e. `4.1.x`, `3.2.x` and so on.
+
 Plugin tested with `4.1.x`, `4.0.x`, `3.4.x`, `3.3.x`, `3.2.x`, `3.1.x`, `3.0.x`, `2.6.x` and `2.5.x` versions of Redmine.
 
 ## Features
