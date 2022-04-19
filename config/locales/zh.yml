@@ -8,5 +8,5 @@ zh:
     errors:
       unable_to_group_in_tree_view: 无法以树状视图分组
     settings:
-      default_redirect_to_tree_view: 将树状视图设为问题的默认显示页面（若项目包含超过1,000+以上的问题，显示速度将会非常非常慢，慎用！！）
-      default_redirect_to_tree_view_without_project: "无项目范围,将树状视图设为问题的默认显示页面（若项目包含超过1,000+以上的问题，显示速度将会非常非常慢，慎用！！）"
+      default_redirect_to_tree_view: 将树状视图设为问题的默认-显示页面（若项目包含超过1,000+以上的问题，显示速度将会非常非常慢，慎用！！）
+      default_redirect_to_tree_view_without_project: "将树状视图设为问题的默认-无项目区别显示页面（若项目包含超过1,000+以上的问题，显示速度将会非常非常慢，慎用！！）"
