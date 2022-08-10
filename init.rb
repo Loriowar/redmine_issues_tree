@@ -1,12 +1,16 @@
-require_dependency 'redmine_issues_tree/hook_listener'
 
 plugin_name = :redmine_issues_tree
+plugin_root = File.dirname(__FILE__)
+
+if Rails.version < '6.0' || !Rails.autoloaders.zeitwerk_enabled?
+  require_dependency plugin_root + '/lib/redmine_issues_tree/hook_listener'
+end
 
 Redmine::Plugin.register plugin_name do
   name 'Redmine Issues Tree plugin'
   author 'Ivan Zabrovskiy'
   description 'Provides a tree view of the issues list'
-  version RedmineIssuesTree::VERSION
+  version RedmineIssuesTree::Version::VERSION
   url 'https://github.com/Loriowar/redmine_issues_tree'
   author_url 'https://loriowar.com/about'
 
@@ -17,7 +21,7 @@ Redmine::Plugin.register plugin_name do
            }
 end
 
-Rails.configuration.to_prepare do
+def patch_init
   prepend_patches_map =
     {
       ::RedmineIssuesTree::IssuesControllerPatch => ::IssuesController
@@ -32,6 +36,16 @@ Rails.configuration.to_prepare do
     }
   include_patch_map.each_pair do |patch, target|
     target.send(:include, patch) unless target.included_modules.include?(patch)
+  end
+end
+
+if Rails.version > '6.0' && Rails.autoloaders.zeitwerk_enabled?
+  Rails.application.config.after_initialize do
+    patch_init
+  end
+else
+  Rails.configuration.to_prepare do
+    patch_init
   end
 end
 
