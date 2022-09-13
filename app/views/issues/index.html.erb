@@ -17,7 +17,7 @@
 
     <%= link_to_if_authorized l(:label_settings),
               {:controller => 'projects', :action => 'settings', :id => @project, :tab => 'issues'},
-              :class => 'icon icon-settings' if User.current.allowed_to?(:manage_categories, @project) %>
+              :class => 'icon icon-settings' if User.current.allowed_to?(:edit_project, @project) %>
   <% end %>
 
   <%# issues_tree patch %>
@@ -42,7 +42,7 @@
 <% end %>
 
 <% other_formats_links do |f| %>
-  <%= f.link_to_with_query_parameters 'Atom', :key => User.current.rss_key %>
+  <%= f.link_to_with_query_parameters 'Atom', :key => User.current.atom_key %>
   <%= f.link_to_with_query_parameters 'CSV', {}, :onclick => "showModal('csv-export-options', '350px'); return false;" %>
   <%= f.link_to_with_query_parameters 'PDF' %>
 <% end %>
@@ -55,10 +55,16 @@
     <label><%= radio_button_tag 'c[]', '', true %> <%= l(:description_selected_columns) %></label><br />
     <label><%= radio_button_tag 'c[]', 'all_inline' %> <%= l(:description_all_columns) %></label>
   </p>
-  <p>
-    <label><%= check_box_tag 'c[]', 'description', @query.has_column?(:description) %> <%= l(:field_description) %></label>
-    <label><%= check_box_tag 'c[]', 'last_notes', @query.has_column?(:last_notes) %> <%= l(:label_last_notes) %></label>
-  </p>
+  <% if @query.available_block_columns.any? %>
+    <fieldset id="csv-export-block-columns">
+      <legend>
+        <%= toggle_checkboxes_link('#csv-export-block-columns input[type=checkbox]') %>
+      </legend>
+      <% @query.available_block_columns.each do |column| %>
+        <label><%= check_box_tag 'c[]', column.name, @query.has_column?(column), :id => nil %> <%= column.caption %></label>
+      <% end %>
+    </fieldset>
+  <% end %>
   <%= export_csv_encoding_select_tag %>
   <% if @issue_count > Setting.issues_export_limit.to_i %>
   <p class="icon icon-warning">
@@ -82,12 +88,12 @@
 <% content_for :header_tags do %>
     <%= auto_discovery_link_tag(:atom,
                                 {:query_id => @query, :format => 'atom',
-                                 :page => nil, :key => User.current.rss_key},
+                                 :page => nil, :key => User.current.atom_key},
                                 :title => l(:label_issue_plural)) %>
     <%= auto_discovery_link_tag(:atom,
                                 {:controller => 'journals', :action => 'index',
                                  :query_id => @query, :format => 'atom',
-                                 :page => nil, :key => User.current.rss_key},
+                                 :page => nil, :key => User.current.atom_key},
                                 :title => l(:label_changes_details)) %>
 <% end %>
 
