@@ -9,7 +9,7 @@ This is a plugin for [Redmine](http://www.redmine.org/). It's provides a tree vi
 Please, use a branch with name corresponding to your
 Redmine version i.e. `4.1.x`, `3.2.x` and so on.
 
-Plugin tested with `4.2.x`, `4.1.x`, `4.0.x`, `3.4.x`, `3.3.x`, `3.2.x`, `3.1.x`, `3.0.x`, `2.6.x` and `2.5.x` versions of Redmine.
+Plugin tested with `5.0.x`, `4.2.x`, `4.1.x`, `4.0.x`, `3.4.x`, `3.3.x`, `3.2.x`, `3.1.x`, `3.0.x`, `2.6.x` and `2.5.x` versions of Redmine.
 
 ## Features
 
@@ -21,7 +21,7 @@ speed of this feature related with amount of issues in project and in case of >1
 
 ## Support
 
-Features are added only for `4.x` and `3.x` versions. Bugfix and locales available for all version from `2.6.x` and higher. 
+Features are added only for `5.x`, `4.x` and `3.x` versions. Bugfix and locales available for all version from `2.6.x` and higher. 
 
 ## Usage
 
