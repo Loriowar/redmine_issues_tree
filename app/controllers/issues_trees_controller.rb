@@ -3,6 +3,11 @@ class IssuesTreesController < ApplicationController
   include QueriesHelper
   helper :issues
   helper :versions
+ 
+ if Redmine::Plugin.installed?(:redmineup_tags)
+    helper :tags
+    helper :issues_tags
+  end
 
   menu_item :issues, only: :tree_index
 
