@@ -1,6 +1,10 @@
 <tr id="issue-<%= issue.id %>" class="hascontextmenu <%= cycle('odd', 'even') %> <%= issue.css_classes %>"
     data-tt-id="<%= issue.id %>"
-    data-tt-branch="<%= issue.children.where(id: issues_ids).any? ? 'true' : 'false' %>"
+    <% if size > 1000 %>
+      data-tt-branch="<%= issue.children? ? 'true' : 'false' %>"
+    <% else %>
+      data-tt-branch="<%= issue.children.where(id: issues_ids).any? ? 'true' : 'false' %>"
+    <% end %>
     data-tt-parent-id="<%= issue.parent_id %>">
   <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", issue.id, false, :id => nil) %></td>
   <td class="id"><%= link_to issue.to_param, controller: 'issues', action: 'show', id: issue %></td>
