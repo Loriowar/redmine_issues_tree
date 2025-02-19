@@ -1,0 +1,2 @@
+<!-- insert_bottom '.contextual' -->
+<%= call_hook(:view_issues_index_contextual, {issues: @issues, project: @project, query: @query}) %>
