@@ -1,0 +1,27 @@
+<tr id="issue-<%= issue.id %>" class="hascontextmenu <%= cycle('odd', 'even') %> <%= issue.css_classes %>"
+    data-tt-id="<%= issue.id %>"
+    data-tt-branch="<%= issue.children.where(id: issues_ids).any? ? 'true' : 'false' %>"
+    data-tt-parent-id="<%= issue.parent_id %>">
+  <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", issue.id, false, :id => nil) %></td>
+  <td class="id"><%= link_to issue.to_param, controller: 'issues', action: 'show', id: issue %></td>
+  <% # @note: exclude :issue_id column for compatibility with 'issue_id' plugin %>
+  <% query.inline_columns.reject { |c| %i(id issue_id).include?(c.name) }.each do |column| %>
+    <%= content_tag('td', column_content(column, issue), :class => column.css_classes) %>
+  <% end %>
+  <td class="buttons"><%= link_to_context_menu %></td>
+</tr>
+<% query.block_columns.each do |column|
+  if (text = column_content(column, issue)) && text.present? -%>
+    <tr class="<%= current_cycle %>"
+        data-tt-id="<%= issue.id %>"
+        data-tt-branch="false"
+        data-tt-parent-id="<%= issue.parent_id %>">
+      <td colspan="<%= query.inline_columns.size + 1 %>" class="<%= column.css_classes %>">
+        <% if query.block_columns.count > 1 %>
+          <span><%= column.caption %></span>
+        <% end %>
+        <%= text %>
+      </td>
+    </tr>
+  <% end -%>
+<% end -%>

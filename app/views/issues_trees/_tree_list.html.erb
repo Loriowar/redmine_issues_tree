@@ -1,0 +1,33 @@
+<% tree_id = 'issues-tree' %>
+<% query_options = nil unless defined?(query_options) %>
+<% query_options ||= {} %>
+
+<div class="tree-actions-container">
+  <input type="button" value="<%= l(:expand_current_nodes, scope: 'issues_tree') %>" onclick="<%= "jQuery('#'+'#{tree_id}').treetable('expandAll');" %>">
+  <input type="button" value="<%= l(:collapse_all, scope: 'issues_tree') %>" onclick="<%= "jQuery('#'+'#{tree_id}').treetable('collapseAll');" %>">
+</div>
+
+<%= form_tag({}, :data => {:cm_url => issues_context_menu_path}) do -%>
+<%= hidden_field_tag 'back_url', url_for(:params => request.query_parameters), :id => nil %>
+<div class="autoscroll">
+<table class="list issues odd-even <%= query.css_classes %>" id="<%= tree_id %>">
+  <thead>
+    <tr>
+      <th class="checkbox hide-when-print">
+        <%= check_box_tag 'check_all', '', false, :class => 'toggle-selection',
+              :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" %>
+      </th>
+      <% query.inline_columns.each do |column| %>
+        <%= column_header(query, column, query_options) %>
+      <% end %>
+      <th class="buttons"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% issues.each do |issue| %>
+      <%= render partial: 'tree_node', :locals => {:issue => issue, :query => query, :issues_ids => issues_ids} %>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<% end -%>
