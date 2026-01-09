@@ -1,0 +1,2 @@
+<!-- insert_before '.contextual' -->
+<%= call_hook(:view_issues_index_header, {issues: @issues, project: @project, query: @query}) %>

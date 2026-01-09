@@ -26,3 +26,7 @@ Redmine::AccessControl.
     push('issues_trees/tree_index').
     push('issues_trees/redirect_with_params').
     push('issues_trees/tree_children')
+
+# Add deface overrides files path.
+Rails.application.paths["app/overrides"] ||= []
+Rails.application.paths["app/overrides"] << File.expand_path("../app/overrides", __FILE__)
