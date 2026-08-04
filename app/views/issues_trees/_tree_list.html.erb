@@ -1,6 +1,7 @@
 <% tree_id = 'issues-tree' %>
 <% query_options = nil unless defined?(query_options) %>
 <% query_options ||= {} %>
+<% group_counts = {} unless defined?(group_counts) %>
 
 <div class="tree-actions-container">
   <input type="button" value="<%= l(:expand_current_nodes, scope: 'issues_tree') %>" onclick="<%= "jQuery('#'+'#{tree_id}').treetable('expandAll');" %>">
@@ -24,11 +25,30 @@
       <th class="buttons hide-when-print"></th>
     </tr>
   </thead>
-  <tbody>
-    <% issues.each do |issue| %>
-      <%= render partial: 'tree_node', :locals => {:issue => issue, :query => query, :issues_ids => issues_ids} %>
+  <%# Each group keeps its rows in a dedicated tbody. Collapsing a group hides
+      that element as a whole, which leaves the per-row visibility treetable
+      maintains for collapsed branches untouched. %>
+  <% tree_root_groups(issues, query, group_counts).each do |group_name, group_count, group_issues| %>
+    <% if group_name %>
+      <tbody class="issues-tree-group-header">
+        <tr class="group open">
+          <td colspan="<%= query.inline_columns.size + 2 %>">
+            <span class="expander icon icon-expanded" onclick="toggleIssuesTreeGroup(this);"><%= sprite_icon('angle-down') %></span>
+            <span class="name"><%= group_name %></span>
+            <% if group_count %>
+              <span class="badge badge-count count"><%= group_count %></span>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
     <% end %>
-  </tbody>
+    <tbody class="issues-tree-group-body">
+      <% reset_cycle %>
+      <% group_issues.each do |issue| %>
+        <%= render partial: 'tree_node', :locals => {:issue => issue, :query => query, :issues_ids => issues_ids} %>
+      <% end %>
+    </tbody>
+  <% end %>
 </table>
 </div>
 <% end -%>

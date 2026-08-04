@@ -1,9 +1,9 @@
-.icon-orange-tree {
-    background-image: url(../images/tree_icon.png);
-}
-.icon-plane-list {
-  background-image: url(../images/text_list_bullets.png);
-}
+/* The tree view and plain list links used to carry their icon as a
+   background-image on an .icon element. Redmine 6 renders icons as inline SVG
+   sprites and no longer gives .icon the background-repeat/-position rules that
+   made that work, so under themes that follow suit (Opale, for one) the image
+   tiled across the whole link. The icons come from sprite_icon() now and need
+   no rule here. */
 
 .tree-actions-container {
   margin: 10px;
