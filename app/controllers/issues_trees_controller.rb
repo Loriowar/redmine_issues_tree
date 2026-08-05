@@ -11,6 +11,7 @@ class IssuesTreesController < ApplicationController
 
   # Action for the issues tree view
   def tree_index
+    retrieve_default_query
     retrieve_query
 
     query_params = params.reject{|k, _| [:action, :controller, :utf8].include?(k.to_sym)}
@@ -54,6 +55,7 @@ class IssuesTreesController < ApplicationController
     # merge for proper work of retrieve_query
     params.permit!.merge!(params[:query_params])
 
+    retrieve_default_query
     retrieve_query
 
     # Children are rendered inside the group their root issue belongs to, so
@@ -77,6 +79,30 @@ class IssuesTreesController < ApplicationController
   end
 
   private
+
+  # IssuesController#index applies the configured default query (Query#is_default)
+  # via this same check before calling retrieve_query, so a session-less request
+  # lands on it. This controller does not inherit from IssuesController, so
+  # without this call, retrieve_query falls straight to its own fallback -- a
+  # brand new unsaved query unrelated to the default -- every time the session
+  # does not already carry a query id (fresh browser, expired session). Mirrors
+  # IssuesController#retrieve_default_query.
+  def retrieve_default_query
+    return if params[:query_id].present?
+    return if params[:set_filter]
+
+    if params[:without_default].present?
+      params[:set_filter] = 1
+      return
+    end
+    if session[:issue_query]
+      query_id, project_id = session[:issue_query].values_at(:id, :project_id)
+      return if query_id && project_id == @project&.id && IssueQuery.exists?(id: query_id)
+    end
+    if (default_query = IssueQuery.default(project: @project))
+      params[:query_id] = default_query.id
+    end
+  end
 
   # Counts issues per group, applying the tree view's inheritance rule: an
   # issue is counted in the group of the topmost ancestor that still belongs to
