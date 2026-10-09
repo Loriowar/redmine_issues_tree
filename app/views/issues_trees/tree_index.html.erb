@@ -49,7 +49,7 @@
 <p class="nodata"><%= l(:label_no_data) %></p>
 <% else %>
 <%= render_query_totals(@query) %>
-<%= render :partial => 'issues_trees/tree_list', :locals => {:issues => @issues, :query => @query, :issues_ids => @issues_ids} %>
+<%= render :partial => 'issues_trees/tree_list', :locals => {:issues => @issues, :query => @query, :issues_ids => @issues_ids, :group_counts => @group_counts} %>
 <%# No pagination for tree %>
 <% end %>
 

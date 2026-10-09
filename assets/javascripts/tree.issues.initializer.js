@@ -1,3 +1,23 @@
+// Expand/collapse a group of the tree view.
+//
+// Redmine's own toggleRowGroup() calls .toggle() on every row until the next
+// group row, which would invert the rows treetable keeps hidden for collapsed
+// branches. Each group owns a tbody instead, so toggling that single element
+// hides the whole group and restores it with the branch states intact.
+function toggleIssuesTreeGroup(el) {
+  var $header = $(el).parents('tr').first();
+  var $body = $header.closest('tbody').next('tbody.issues-tree-group-body');
+
+  $header.toggleClass('open');
+  $(el).toggleClass('icon-expanded icon-collapsed');
+
+  if (typeof toggleExpendCollapseIcon === 'function') {
+    toggleExpendCollapseIcon(el);
+  }
+
+  $body.toggle();
+}
+
 $( document ).ready(function() {
   var $table = $("#issues-tree");
   var $form = $(".issues-tree-index-form");

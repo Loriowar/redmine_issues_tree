@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon--sprite">
+  <defs>
+    <symbol viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" id="icon--tree">
+      <path d="M5 5h14"/>
+      <path d="M5 5v12a1 1 0 0 0 1 1h4"/>
+      <path d="M5 11h5"/>
+      <path d="M10 11h9"/>
+      <path d="M10 18h9"/>
+    </symbol>
+  </defs>
+</svg>
