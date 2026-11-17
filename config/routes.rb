@@ -1,7 +1,7 @@
 RedmineApp::Application.routes.draw do
 
   resources :projects do
-    resources :issues_trees, only: :none do
+    resources :issues_trees, only: [] do
       collection do
         get 'tree_index'
         post 'redirect_with_params'
@@ -13,7 +13,7 @@ RedmineApp::Application.routes.draw do
     end
   end
 
-  resources :issues_trees, only: :none do
+  resources :issues_trees, only: [] do
     collection do
       get 'tree_index'
       post 'redirect_with_params'
