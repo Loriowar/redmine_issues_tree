@@ -5,6 +5,13 @@
   background-image: url(../images/text_list_bullets.png);
 }
 
+.icon-orange-tree,
+.icon-plane-list {
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding-left: 20px;
+}
+
 .tree-actions-container {
   margin: 10px;
 }
